@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: tomcat
+  name: tomcat
+spec:
+  containers:
+  - image: tomcat:latest
+    name: tomcat
+    ports:
+    - containerPort: 8080
+      name: tomcat
+    volumeMounts:
+    - mountPath: "/usr/local/tomcat/webapps"
+      name: tomcat-storage
+  volumes:
+  - name: tomcat-storage
+    persistentVolumeClaim:
+      claimName: pv-claim
